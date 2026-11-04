@@ -27,4 +27,4 @@ Updated: 2026-11-04
 
 ## Release status
 
-The local project is being prepared for GitHub. It is not yet a Git repository and has not been published. Public repository creation requires the owner's confirmation; GitHub write authentication is not yet verified.
+Published to the owner-approved public repository: [ankesh70905/campuscode-dashboard](https://github.com/ankesh70905/campuscode-dashboard), on the `main` branch. The current release commit is recorded in [GITHUB-RELEASE-REPORT.md](./GITHUB-RELEASE-REPORT.md). The application has not been deployed; there is no production URL.
