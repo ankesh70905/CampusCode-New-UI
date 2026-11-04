@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Sign in to CampusCode." />
+    <meta name="theme-color" content="#f3f6f7" />
+    <title>Login — CampusCode</title>
+    <script>
+      try {
+        const savedTheme = localStorage.getItem('campuscode-theme');
+        const preferredTheme = savedTheme || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.dataset.theme = preferredTheme === 'dark' ? 'dark' : 'light';
+      } catch (error) {
+        console.error('Unable to read the CampusCode theme preference.', error);
+      }
+    </script>
+    <script type="module" crossorigin src="/campuscode-dashboard/assets/main-D5POqOGw.js"></script>
+    <link rel="stylesheet" crossorigin href="/campuscode-dashboard/assets/main-DQpbfP6U.css">
+  </head>
+  <body>
+    <div id="app"></div>
+    <noscript>This site requires JavaScript to run.</noscript>
+  </body>
+</html>
