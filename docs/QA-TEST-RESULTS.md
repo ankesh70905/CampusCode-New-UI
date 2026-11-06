@@ -31,8 +31,7 @@ Duplicate-registration and deadline-boundary rules, full project edit/status wor
 
 ## Phase 9 deployment-preparation checks
 
-- Clean `npm ci` in a clone of the release branch completed; `npm audit --json` reported 0 known vulnerabilities.
-- `VITE_BASE_PATH=/CampusCode-Recreate/ npm run build` passed and emitted `dist/404.html`, base-prefixed JS/CSS/logo paths, and an unmodified bundled CampusCode PNG.
-- A local static-host simulation serving the project under `/CampusCode-Recreate/` loaded 14 direct routes (including Login, Register, event details/Hub, projects, achievements, certificates, profile, and notifications) with no broken images or browser request/page errors.
-- The existing public Pages URL returned HTTP 200 but served the previous `CampusCode — Hackathon Arena` vanilla-JavaScript version, not this React application.
-- This simulation verifies the configured path and SPA fallback behavior, not GitHub Pages itself. The remote Pages source is still configured for legacy `gh-pages`; no deployment or live React URL has been verified.
+- `npm run build` and `VITE_BASE_PATH=/CampusCode-Recreate/ npm run build` both passed.
+- The project-base build generated 30 static entry pages for the declared public, dashboard, event, and project routes, plus `dist/404.html`; JS, CSS, and logo references use the `/CampusCode-Recreate/` base.
+- A GitHub Pages-style local host simulation loaded seven representative direct routes (overview, login, registration, event discovery, event hub, project detail, and profile). Each reached HTTP 200 after any directory redirect, rendered the expected page title and main content, and had no broken images, failed requests, or page errors. Query strings and fragments were preserved on the project route.
+- This simulation verifies generated route files and project-base asset paths, not the deployed website. Live Pages verification is tracked in the GitHub release report.

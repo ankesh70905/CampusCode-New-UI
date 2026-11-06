@@ -29,6 +29,7 @@ export default function App() {
 
   useLayoutEffect(() => {
     const previousTitle = document.title;
+    const normalizedPathname = pathname.replace(/\/+$/, "") || "/";
     const titles = {
       "/": "CampusCode — Your ideas deserve an arena",
       "/login": "Log in — CampusCode",
@@ -44,11 +45,14 @@ export default function App() {
       "/app/notifications": "Notifications — CampusCode",
       "/app/settings": "Settings — CampusCode",
     };
-    const eventId = pathname.match(/^\/app\/events\/([^/]+)/)?.[1];
+    const eventId = normalizedPathname.match(/^\/app\/events\/([^/]+)/)?.[1];
     const event = eventCatalog.find((item) => item.id === eventId);
+    const fallbackTitle = normalizedPathname.startsWith("/app/projects/")
+      ? "Project Workspace — CampusCode"
+      : "CampusCode";
     document.title = event
-      ? `${event.title}${pathname.endsWith("/hub") ? " Event Hub" : ""} — CampusCode`
-      : titles[pathname] || (pathname.startsWith("/app/projects/") ? "Project Workspace — CampusCode" : "CampusCode");
+      ? `${event.title}${normalizedPathname.endsWith("/hub") ? " Event Hub" : ""} — CampusCode`
+      : titles[normalizedPathname] || fallbackTitle;
     return () => {
       document.title = previousTitle;
     };
