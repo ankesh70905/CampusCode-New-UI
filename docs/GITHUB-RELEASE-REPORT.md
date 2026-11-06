@@ -1,7 +1,7 @@
 # GitHub Release Report
 
 **Checked:** 2026-11-07
-**Status:** The React prototype is deployed from `main`. GitHub Pages is currently configured at the renamed `CampusCode-New-UI` URL; this release updates Vite's base path to match the new repository name.
+**Status:** The React prototype is deployed from `main` and verified at the renamed `CampusCode-New-UI` Pages URL.
 
 ## Repository and deployment
 
@@ -23,7 +23,9 @@
 
 - The repository was renamed from `CampusCode-Recreate` to `CampusCode-New-UI`. The old Pages URL now returns GitHub's 404 page.
 - The new Pages URL responds, but the prior published bundle referenced `/CampusCode-Recreate/` for JS/CSS and used that path as the React Router basename, leaving the app blank.
-- This change sets the Actions build base to `/CampusCode-New-UI/`, updates clone/site links, and retains generated direct-route entry pages. Verify the new deployment at the renamed URL after Actions completes.
+- PR #4 updated the Actions build base to `/CampusCode-New-UI/` and refreshed clone/site links.
+- Deployment run `42296184855` succeeded for merge commit `b6f403e8e15a9bae8c872d37968b9c56ed00b652`.
+- A fresh live browser check confirmed the home page, dashboard overview, login, Event Hub, and project detail load at the renamed URL. They returned HTTP 200 after any directory redirect, rendered the expected page titles and main content, and loaded the logo. No failed requests or page errors were observed.
 
 ## Remaining release limits
 
