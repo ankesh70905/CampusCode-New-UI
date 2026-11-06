@@ -9,6 +9,7 @@
 - GitHub CLI is authenticated as the repository owner and found the public repository [CampusCode-Recreate](https://github.com/ankesh70905/CampusCode-Recreate), default branch `main`.
 - Created and pushed `react-dashboard-release` based on `main`; commit `a1ed9e5` (`feat: add React CampusCode platform release`). The working project folder now tracks this branch. No PR was opened.
 - The existing repository is a different vanilla-JavaScript/Vite landing and authentication preview. Its published Pages site is `https://ankesh70905.github.io/CampusCode-Recreate/`; this is not the React dashboard prototype in this folder.
+- The current Pages URL returned HTTP 200 and HTML title `CampusCode — Hackathon Arena`, confirming the old site is online; it does not serve this React app.
 - The remote repository's `main` and Pages deployment were not modified or redeployed. The feature branch replaces the old app in its branch tree while preserving the previous version and commit history on `main`.
 - Review the branch diff before merging. Merging this branch changes the repository's default application and, once Pages is configured for Actions, changes the live site; those actions have not been taken.
 
@@ -28,7 +29,7 @@
 - Clean `npm ci`, `npm audit --json`, and `VITE_BASE_PATH=/CampusCode-Recreate/ npm run build` passed in the isolated clone.
 - A local static-host simulation verified 14 project-site direct routes, logo loads, SPA fallback, and no browser request/page errors.
 - Earlier logo-specific checks confirmed the bundled logo is byte-identical to the existing project asset and loads from dev and production preview.
-- GitHub Actions workflow has not run for this React app; GitHub Pages is currently configured with the legacy `gh-pages` branch source.
+- GitHub Actions workflow has not run for this React app (zero runs on the release branch); GitHub Pages is currently configured with the legacy `gh-pages` branch source.
 - No live React deployment, clone test, Safari test, or cross-browser release test has been performed.
 
 ## Required before release
