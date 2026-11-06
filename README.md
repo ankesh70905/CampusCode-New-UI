@@ -44,7 +44,6 @@ The Inter SIL Open Font License notice is retained at [`public/assets/fonts/Inte
 ```sh
 git clone https://github.com/ankesh70905/CampusCode-Recreate.git
 cd CampusCode-Recreate
-git checkout react-dashboard-release
 npm install
 npm run dev
 ```
@@ -60,6 +59,8 @@ npm run preview
 
 The static production output is generated in `dist/`. `npm run preview` serves that output locally for a production-like smoke test.
 
+For GitHub Pages project sites, set `VITE_BASE_PATH` to the repository path, including its leading and trailing slashes. The production build creates static entry files for the app's known routes so direct links load on GitHub Pages; `404.html` remains the fallback for unknown routes.
+
 ## Demo limitations
 
 - Login and registration are client-side demonstrations; no credentials are authenticated or sent to a service.
@@ -72,8 +73,8 @@ The static production output is generated in `dist/`. `npm run preview` serves t
 
 ## Links and project status
 
-- GitHub repository: [CampusCode-Recreate](https://github.com/ankesh70905/CampusCode-Recreate) — the React prototype is on the [`react-dashboard-release` branch](https://github.com/ankesh70905/CampusCode-Recreate/tree/react-dashboard-release). The default `main` branch and current Pages site still contain the separate vanilla-JavaScript version; merge the release branch only after review.
-- Live demo: pending deployment of this React version. The currently configured GitHub Pages site still serves the separate existing version; it is not represented as this prototype's live demo.
+- GitHub repository: [CampusCode-Recreate](https://github.com/ankesh70905/CampusCode-Recreate) — the React prototype is on the default `main` branch.
+- Live demo: [CampusCode on GitHub Pages](https://ankesh70905.github.io/CampusCode-Recreate/).
 - Project and release documentation: [`docs/`](docs/), including the [QA results](docs/QA-TEST-RESULTS.md), [architecture](docs/PROJECT-ARCHITECTURE.md), and [AI assistance log](docs/AI-ASSISTANCE-LOG.md).
 
 ## AI assistance and submission

@@ -35,7 +35,7 @@ docs/
 
 `src/App.jsx` owns route composition; shared shells are in `src/components/`, route content in `src/pages/`, sample records in `src/data/`, persistence/theme logic in `src/state/`, and validation/date helpers in `src/utils/`. Vite serves the original logo from `public/assets/brand/`; `src/assets/brand.js` prefixes it with `import.meta.env.BASE_URL` for subpath hosting.
 
-For the existing GitHub Pages project-site path, `vite.config.js` reads `VITE_BASE_PATH`, `src/main.jsx` passes Vite's base URL to React Router as its basename, and the build emits `dist/404.html` for SPA route fallback. `.github/workflows/deploy-pages.yml` defines the production build/deploy pipeline; it is not active until the repository uses GitHub Actions as its Pages source and the workflow is merged to the deployment branch.
+For the GitHub Pages project-site path, `vite.config.js` reads `VITE_BASE_PATH`, `src/main.jsx` passes Vite's base URL to React Router as its basename, and the build creates static `index.html` entries for the declared public, dashboard, event, and project routes. This lets GitHub Pages serve known direct links instead of returning a not-found response. The build also emits `dist/404.html` for unmatched paths. `.github/workflows/deploy-pages.yml` defines the production build/deploy pipeline, which is active on the repository's `main` branch.
 
 ## Route ownership
 
