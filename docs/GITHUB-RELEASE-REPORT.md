@@ -1,15 +1,16 @@
 # GitHub Release Preparation Report
 
 **Checked:** 2026-11-07
-**Status:** Local preparation is underway. No commit, push, Pages setting change, or live deployment has been made in this workspace.
+**Status:** The React prototype is connected to the public repository on a review branch. The existing default branch and live Pages site remain unchanged.
 
 ## Repository discovery
 
 - The project folder initially had no `.git` directory, remote, `.gitignore`, or hosting configuration.
 - GitHub CLI is authenticated as the repository owner and found the public repository [CampusCode-Recreate](https://github.com/ankesh70905/CampusCode-Recreate), default branch `main`.
+- Created and pushed `react-dashboard-release` based on `main`; commit `a1ed9e5` (`feat: add React CampusCode platform release`). The working project folder now tracks this branch. No PR was opened.
 - The existing repository is a different vanilla-JavaScript/Vite landing and authentication preview. Its published Pages site is `https://ankesh70905.github.io/CampusCode-Recreate/`; this is not the React dashboard prototype in this folder.
-- The remote repository's `main` and Pages deployment were inspected read-only. They have not been overwritten or redeployed.
-- To retain that history and current deployment, the proposed integration is a new branch based on `main`, reviewed before merge. Publishing or merging that branch can change the public project; it requires participant approval.
+- The remote repository's `main` and Pages deployment were not modified or redeployed. The feature branch replaces the old app in its branch tree while preserving the previous version and commit history on `main`.
+- Review the branch diff before merging. Merging this branch changes the repository's default application and, once Pages is configured for Actions, changes the live site; those actions have not been taken.
 
 ## Local release preparation
 
@@ -32,8 +33,8 @@
 
 ## Required before release
 
-1. Review the release branch diff and screenshots.
-2. Confirm replacing/updating the public repository's app is intended; keep the existing main and deployed site unchanged until merge approval.
+1. Review the release branch diff; valid representative screenshots are still pending.
+2. Approve merging/replacing the public repository's app; keep the existing main and deployed site unchanged until approval.
 3. Build and smoke-test the branch output, including direct routes, base-path assets, theme behavior, and mobile layouts.
 4. Merge the reviewed branch or approve another explicit release operation.
 5. Change GitHub Pages source from legacy branch deployment to GitHub Actions if Pages remains the selected host, then verify the completed workflow and public URL.

@@ -72,7 +72,7 @@ The static production output is generated in `dist/`. `npm run preview` serves t
 
 ## Links and project status
 
-- GitHub repository: [CampusCode-Recreate](https://github.com/ankesh70905/CampusCode-Recreate) — this existing repository currently contains a separate vanilla-JavaScript version. The `react-dashboard-release` branch has not yet been pushed; omit the branch checkout after that version is intentionally merged as the default branch.
+- GitHub repository: [CampusCode-Recreate](https://github.com/ankesh70905/CampusCode-Recreate) — the React prototype is on the [`react-dashboard-release` branch](https://github.com/ankesh70905/CampusCode-Recreate/tree/react-dashboard-release). The default `main` branch and current Pages site still contain the separate vanilla-JavaScript version; merge the release branch only after review.
 - Live demo: pending deployment of this React version. The currently configured GitHub Pages site still serves the separate existing version; it is not represented as this prototype's live demo.
 - Project and release documentation: [`docs/`](docs/), including the [QA results](docs/QA-TEST-RESULTS.md), [architecture](docs/PROJECT-ARCHITECTURE.md), and [AI assistance log](docs/AI-ASSISTANCE-LOG.md).
 
