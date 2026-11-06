@@ -31,7 +31,8 @@ Duplicate-registration and deadline-boundary rules, full project edit/status wor
 
 ## Phase 9 deployment-preparation checks
 
-- `npm run build` and `VITE_BASE_PATH=/CampusCode-Recreate/ npm run build` both passed.
-- The project-base build generated 30 static entry pages for the declared public, dashboard, event, and project routes, plus `dist/404.html`; JS, CSS, and logo references use the `/CampusCode-Recreate/` base.
+- `npm run build` and `VITE_BASE_PATH=/CampusCode-New-UI/ npm run build` both passed.
+- The project-base build generated 30 static entry pages for the declared public, dashboard, event, and project routes, plus `dist/404.html`; JS, CSS, and logo references use the `/CampusCode-New-UI/` base.
 - A GitHub Pages-style local host simulation loaded seven representative direct routes (overview, login, registration, event discovery, event hub, project detail, and profile). Each reached HTTP 200 after any directory redirect, rendered the expected page title and main content, and had no broken images, failed requests, or page errors. Query strings and fragments were preserved on the project route.
 - After deployment run `42294607939`, live browser checks visited the homepage, overview, login, registration, event discovery, Event Hub, project detail, and profile. All returned HTTP 200 after any directory redirect, showed expected titles and main content, and loaded the logo without failed requests or page errors.
+- After the repository rename, the previous `CampusCode-Recreate` Pages URL returned HTTP 404. The new `CampusCode-New-UI` Pages URL responded but the old bundle's assets and router basename still pointed to the old path. A deployment with the renamed base is required; results will be recorded after live verification.
