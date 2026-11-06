@@ -1,7 +1,7 @@
 # GitHub Release Report
 
 **Checked:** 2026-11-07
-**Status:** The React prototype is deployed from `main` to GitHub Pages. A follow-up change is being prepared to make known deep links return successful static responses.
+**Status:** The React prototype and direct-route fix are deployed from `main` to GitHub Pages.
 
 ## Repository and deployment
 
@@ -14,9 +14,10 @@
 
 ## Direct-route follow-up
 
-- Branch `fix/github-pages-direct-routes` adds static `index.html` entries for the app's known routes, retains `404.html` for unknown paths, and normalizes trailing slashes for route-specific document titles.
-- Both root and `/CampusCode-Recreate/` production builds passed. The project-base build generated 30 route entries with base-prefixed assets and the local GitHub Pages-style simulation returned HTTP 200 for seven representative routes without browser errors or broken images.
-- This follow-up has not yet been merged or verified on the live site. GitHub Pages live verification is required after its deployment completes.
+- PR #2 merged the direct-route fix as `9e3366028b6a03c662d36b2dcb8c7e5c82d03eab`.
+- The fix adds static `index.html` entries for the app's known routes, retains `404.html` for unknown paths, and normalizes trailing slashes for route-specific document titles.
+- Both root and `/CampusCode-Recreate/` production builds passed. The project-base build generated 30 route entries with base-prefixed assets; seven representative routes returned HTTP 200 in the local GitHub Pages-style simulation.
+- Deployment run `42294607939` succeeded. Live browser checks visited the home page, overview, login, registration, event discovery, an Event Hub, a project detail, and student profile. Every URL returned HTTP 200 after any directory redirect, rendered the expected title and main content, and loaded the logo. No failed requests, broken images, or page errors were observed.
 
 ## Remaining release limits
 
