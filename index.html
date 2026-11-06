@@ -5,23 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="CampusCode is the digital home for student innovation."
+      content="Discover student innovation opportunities, build projects, and take your ideas further with CampusCode."
     />
-    <meta name="theme-color" content="#f3f6f7" />
-    <title>CampusCode — Hackathon Arena</title>
+    <meta name="theme-color" content="#f7f7f4" />
     <script>
-      try {
-        const savedTheme = localStorage.getItem('campuscode-theme');
-        const preferredTheme = savedTheme || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-        document.documentElement.dataset.theme = preferredTheme === 'dark' ? 'dark' : 'light';
-      } catch (error) {
-        console.error('Unable to read the CampusCode theme preference.', error);
-      }
+      (() => {
+        let theme;
+        try {
+          theme = localStorage.getItem("campuscode.theme");
+        } catch {
+          theme = null;
+        }
+        if (theme !== "light" && theme !== "dark") {
+          theme = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        }
+        document.documentElement.dataset.theme = theme;
+        document.documentElement.style.colorScheme = theme;
+        document.querySelector('meta[name="theme-color"]').content = theme === "dark" ? "#101114" : "#f7f7f4";
+      })();
     </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <title>CampusCode — Your ideas deserve an arena</title>
   </head>
   <body>
-    <div id="app"></div>
-    <noscript>This site requires JavaScript to run.</noscript>
-    <script type="module" src="/src/main.js"></script>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

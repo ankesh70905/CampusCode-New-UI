@@ -1,46 +1,55 @@
 # CampusCode
 
-An original, responsive public-facing CampusCode experience built with semantic HTML, CSS, vanilla JavaScript, and Vite. It includes a landing page plus frontend-only sign-in and registration previews. It is not a connected or authenticated dashboard.
+CampusCode is a student innovation platform prototype for discovering hackathons, tracking local participation, and organizing project work. It brings sample opportunities and student workspace tools together in one responsive React experience.
+
+This is a frontend-only prototype. It is not connected to a production service and does not provide real accounts, event registration, organizer communication, or issued credentials.
 
 ## Screenshots
 
-| Landing page | Dark theme | Mobile |
-|---|---|---|
-| ![CampusCode landing page](docs/screenshots/home-desktop-light.png) | ![CampusCode dark theme](docs/screenshots/home-desktop-dark.png) | ![CampusCode mobile page](docs/screenshots/home-mobile.png) |
-
-| Sign-in preview | Registration preview |
-|---|---|
-| ![CampusCode sign-in preview](docs/screenshots/login-desktop.png) | ![CampusCode registration preview](docs/screenshots/register-desktop.png) |
+Screenshots are not included yet. The available browser capture path did not produce images consistent with the verified viewport dimensions, so inaccurate screenshots were excluded rather than presented as representative desktop/mobile evidence.
 
 ## Features
 
-- Responsive landing page with section navigation and an animated “Build. Compete. Ship.” hero.
-- Light and dark themes; the selected theme is saved in local storage.
-- Sign-in and registration UI previews with form validation, password visibility controls, and a client-side CAPTCHA demonstration.
-- Self-hosted Inter and Plus Jakarta Sans variable fonts.
-- Reduced-motion support and keyboard-accessible navigation controls.
-
-Authentication, account creation, email, password reset, and live hackathon data are not connected. Form data is not sent to a server.
+- Editorial landing page with sample opportunities and platform information.
+- Demo Login and Register forms with validation and clear simulated-authentication disclosures.
+- Student Dashboard with overview, activity, profile, and settings.
+- Event discovery with search, filtering, bookmarks, and local registration simulation.
+- My Events and a sample Event Hub with rounds, team, submissions, announcements, and results.
+- Local project workspace with project details and milestones.
+- Daily streaks, weekly goals, and an activity calendar.
+- Criteria-based sample achievements and a certificate preview collection.
+- Local notification centre.
+- Global Light Mode and Dark Mode with saved browser preference.
+- Reduced-motion support and responsive desktop/mobile layouts.
 
 ## Technology
 
-- HTML5, CSS, native JavaScript modules
-- Vite 8
-- Inter and Plus Jakarta Sans variable WOFF2 fonts (SIL Open Font License)
+- React 18 and React DOM
+- Vite 6
+- React Router 7
+- Lucide React
+- JavaScript and custom CSS
+- Browser LocalStorage for non-sensitive demo state
+
+Fonts use Inter and DM Mono through Google Fonts with system fallbacks. An internet connection may be needed for the hosted font files; the core UI falls back if those requests are unavailable.
+The Inter SIL Open Font License notice is retained at [`public/assets/fonts/Inter-OFL.txt`](public/assets/fonts/Inter-OFL.txt).
 
 ## Requirements
 
-- Node.js 20.19+ or 22.12+
+- Node.js compatible with the installed Vite 6 toolchain
 - npm
 
-## Install and run
+## Run locally
 
 ```sh
-npm ci
+git clone https://github.com/ankesh70905/CampusCode-Recreate.git
+cd CampusCode-Recreate
+git checkout react-dashboard-release
+npm install
 npm run dev
 ```
 
-Vite prints a local URL (usually `http://localhost:5173`). Stop the server with Ctrl+C.
+Vite prints a local development URL. Stop the server with Ctrl+C.
 
 ## Production build
 
@@ -49,37 +58,24 @@ npm run build
 npm run preview
 ```
 
-The static output is written to `dist/`.
+The static production output is generated in `dist/`. `npm run preview` serves that output locally for a production-like smoke test.
 
-### GitHub Pages project site
+## Demo limitations
 
-For a project site served below `https://username.github.io/repository-name/`, copy `.env.example` to `.env.production.local`, set `VITE_BASE_PATH=/repository-name/`, then run `npm run build`. For a domain-root site, use `VITE_BASE_PATH=/`. The local environment file is ignored by Git.
+- Login and registration are client-side demonstrations; no credentials are authenticated or sent to a service.
+- Event listings and organizer information are fictional sample data.
+- Registering for an event only updates LocalStorage on the current browser; it does not contact an organizer.
+- Projects, streaks, goals, achievements, notifications, and team/submission examples are local-only and can be edited or cleared by the user.
+- Certificates and results are illustrative previews, not issued awards or proof of participation.
+- There is no backend, account recovery, email verification, real CAPTCHA, cloud synchronization, or authorization boundary.
+- Do not enter real passwords, secrets, or sensitive personal information.
 
-## Project structure
+## Links and project status
 
-```text
-public/assets/fonts/  Font license notices
-src/assets/fonts/     Self-hosted variable fonts
-src/components/       Shared interface components
-src/pages/            Landing, sign-in, and registration page modules
-src/scripts/          Navigation, theme, form, and motion behavior
-src/styles/           Design tokens and page/component styles
-docs/                 Reference, design, QA, performance, and release notes
-index.html             Landing page entry
-login/index.html       Sign-in entry
-register/index.html    Registration entry
-vite.config.js         Vite build and base-path configuration
-```
+- GitHub repository: [CampusCode-Recreate](https://github.com/ankesh70905/CampusCode-Recreate) — this existing repository currently contains a separate vanilla-JavaScript version. The `react-dashboard-release` branch has not yet been pushed; omit the branch checkout after that version is intentionally merged as the default branch.
+- Live demo: pending deployment of this React version. The currently configured GitHub Pages site still serves the separate existing version; it is not represented as this prototype's live demo.
+- Project and release documentation: [`docs/`](docs/), including the [QA results](docs/QA-TEST-RESULTS.md), [architecture](docs/PROJECT-ARCHITECTURE.md), and [AI assistance log](docs/AI-ASSISTANCE-LOG.md).
 
-## Deployment
+## AI assistance and submission
 
-Not deployed yet. The project is prepared for static hosting; no deployment URL is available.
-
-## Known limitations
-
-- There is no backend, authentication, user account, email service, or live hackathon feed.
-- The sign-in, registration, and CAPTCHA controls are demonstrations only.
-- Screenshots document the current frontend preview and do not imply backend functionality.
-- No automated accessibility audit or real-device testing has been performed.
-
-See [docs/PROJECT-STATUS.md](docs/PROJECT-STATUS.md), [docs/QA-REPORT.md](docs/QA-REPORT.md), and [docs/SECURITY-REVIEW.md](docs/SECURITY-REVIEW.md) for additional status and validation details.
+AI assistance is recorded in [`docs/AI-ASSISTANCE-LOG.md`](docs/AI-ASSISTANCE-LOG.md). The project includes substantial AI-generated implementation. The reported hackathon limit and disclosure format have not been independently confirmed with organizers; no compliance claim is made. Review the log and confirm the applicable rules before using this prototype for a submission.
