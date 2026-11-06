@@ -42,8 +42,8 @@ The Inter SIL Open Font License notice is retained at [`public/assets/fonts/Inte
 ## Run locally
 
 ```sh
-git clone https://github.com/ankesh70905/CampusCode-Recreate.git
-cd CampusCode-Recreate
+git clone https://github.com/ankesh70905/CampusCode-New-UI.git
+cd CampusCode-New-UI
 npm install
 npm run dev
 ```
@@ -73,8 +73,8 @@ For GitHub Pages project sites, set `VITE_BASE_PATH` to the repository path, inc
 
 ## Links and project status
 
-- GitHub repository: [CampusCode-Recreate](https://github.com/ankesh70905/CampusCode-Recreate) — the React prototype is on the default `main` branch.
-- Live demo: [CampusCode on GitHub Pages](https://ankesh70905.github.io/CampusCode-Recreate/).
+- GitHub repository: [CampusCode-New-UI](https://github.com/ankesh70905/CampusCode-New-UI) — the React prototype is on the default `main` branch.
+- Live demo: [CampusCode on GitHub Pages](https://ankesh70905.github.io/CampusCode-New-UI/).
 - Project and release documentation: [`docs/`](docs/), including the [QA results](docs/QA-TEST-RESULTS.md), [architecture](docs/PROJECT-ARCHITECTURE.md), and [AI assistance log](docs/AI-ASSISTANCE-LOG.md).
 
 ## AI assistance and submission

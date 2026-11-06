@@ -34,7 +34,7 @@ jobs:
       - name: Build site
         run: npm run build
         env:
-          VITE_BASE_PATH: /CampusCode-Recreate/
+          VITE_BASE_PATH: /CampusCode-New-UI/
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
