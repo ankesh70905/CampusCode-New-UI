@@ -1,28 +1,27 @@
-# Performance report
+# Phase 8 Performance Report
 
-## Production build
+**Date:** 2026-11-07
 
-Measured with the Vite production build (`npm run build`):
+## Build output
 
-| Output | Raw size | Gzip size |
+Final local production build (`npm run build`, Vite 6.4.5):
+
+| Asset | Compressed source size | Gzip size |
 |---|---:|---:|
-| Shared CSS | 60.95 kB | 11.98 kB |
-| Shared JavaScript | 27.21 kB | 8.12 kB |
-| CSS + JavaScript | 88.16 kB | 20.10 kB |
-| Inter variable WOFF2 | 48.25 kB | Not reported by Vite |
-| Plus Jakarta Sans variable WOFF2 | 27.34 kB | Not reported by Vite |
-| Both font files | 75.59 kB | Not reported by Vite |
-| HTML entry pages | 1.01–1.07 kB each | 0.53–0.56 kB each |
+| JavaScript bundle | 389.39 kB | 111.20 kB |
+| CSS bundle | 135.39 kB | 26.00 kB |
+| HTML entry | 1.53 kB | 0.73 kB |
+| CampusCode logo | 17.43 kB | Not separately reported |
 
-The build completed successfully and transformed 23 modules. The app uses native JavaScript modules; Vite is the only declared development dependency.
+These are build artifact sizes, not network-transfer measurements under a production CDN.
 
-## Implementation notes
+## Browser timing sample
 
-- The hero and preview motion use CSS; no animation library or video download is required.
-- Motion is limited to transforms, opacity, and short transitions, with a reduced-motion path.
-- The project has no application API calls or third-party runtime libraries.
-- Inter and Plus Jakarta Sans are self-hosted as variable WOFF2 assets with system-font fallbacks and SIL Open Font License notices. Font requests stay same-origin; font transfer timing was not profiled.
+A prior local production-preview Performance API sample reported approximately 64 ms for FCP and LCP, with CLS 0 after roughly 1.2 seconds. It was a single local/cached browser sample, so it is directional only and must not be presented as a representative field or Lighthouse result.
 
-## Measurement limits
+## Limits and next steps
 
-No Lighthouse score, Core Web Vitals, network waterfall, CPU profile, or real-device performance measurement was collected. Bundle sizes above are build output measurements only and should not be read as a Lighthouse result.
+- No Lighthouse run or repeatable lab profile was completed.
+- INP was not measured; no user-interaction timing dataset was collected.
+- No physical-device, throttled-network, memory, or long-session profiling was performed.
+- Repeat measurements with a documented browser/device/network setup before making performance claims.

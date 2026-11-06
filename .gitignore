@@ -1,9 +1,23 @@
+# Dependencies and generated output
 node_modules/
 dist/
 coverage/
-.vercel/
-.DS_Store
-*.log
+
+# Local environment and hosting metadata
 .env
 .env.*
 !.env.example
+.vercel/
+.netlify/
+
+# Operating system and editor files
+.DS_Store
+Thumbs.db
+.vscode/*
+!.vscode/extensions.json
+*.swp
+*.swo
+
+# Logs and temporary files
+*.log
+*.tmp

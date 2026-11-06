@@ -1,45 +1,72 @@
-# CampusCode component inventory
+# CampusCode ReBuild '26 — Component Inventory
 
-Dimensions below are reference measurements, not prescribed implementation constants. Values are approximate where the layout scales with viewport width. The landing-page dimensions are measured at 1440px unless a mobile value is called out.
+This inventory describes the current implementation. Proposed enhancements and remaining audit work are identified separately in the roadmap and status notes.
 
-## Public landing page (`/`)
+## Shared shell and primitives
 
-| Component | Purpose, position and size | Visual/content details | Interaction | Responsive behavior |
-|---|---|---|---|---|
-| Header / brand | Top of page, absolute over hero; 88px tall on desktop, 80px mobile, 90px tablet. Desktop padding is 25px × 72px. | Transparent light surface; left brand has three diagonal black/purple/lime slashes, CAMPUSCODE and small HACKATHON ARENA label. | Brand button returns home. | Desktop shows section controls, Login and Join. At 768px and 390px the section controls/Join collapse behind the hamburger; Login remains. |
-| Desktop navigation | Center of header. Four compact DM Mono uppercase buttons. | ABOUT, HOW IT WORKS, HACKATHONS, COMMUNITY. | Smooth-scrolls to corresponding sections; URL stays `/`. | Hidden at tablet/mobile. |
-| Responsive menu | White panel under header, inset from viewport edges; visible when menu is opened. | Vertical navigation and bordered Join CampusCode action; toggle icon changes ☰ to ×. | Opens/closes; selecting a section closes it and scrolls to the section. | Used at the observed 768px and 390px widths. |
-| Header Login / Join | Right side of desktop header. | Login is text-like; Join is thin-bordered rectangular button with outbound arrow. | Opens `/login` or `/register`. | On small widths, Login stays in header and Join moves into the menu. |
-| Hero | First section, full content width, 949px high desktop / 700px mobile. | Warm-white background with fine grid, pale purple/lime radial washes, delicate dashed curves and floating colored points. Includes eyebrow, Chennai · India, sequence label, large three-line headline, supporting copy, Explore button and bottom progress/scroll prompts. | Explore Hackathons scrolls down to the arena experience; scrolling advances the progress/section treatment. Headline outline/fill treatment animates. | Type scales from 216px desktop to 72px at 390px. Copy/action align in a row on wide screens and stack on mobile. |
-| Marquee strip | Immediately below hero; 56px high desktop. | Light gray-green band with repeated IDEAS · PEOPLE · PRODUCTS · INNOVATION · COMMUNITY and purple star separators. | Decorative/repeating; no control behavior observed. | Cropped/repeated horizontally at small widths. |
-| About section | Section 01, 720px desktop / 911px mobile. | Small mono eyebrow, “WHERE STUDENTS BUILD.” oversized heading, supporting paragraph. Large pale orbital diagram has three rings, a central square CC mark and 01/02/03 markers. | Informational; no control behavior observed. | Artwork and text reflow vertically; section becomes taller on mobile. |
-| Experience heading | Section 02, at top of a 1081px desktop section. | Mono sequence/time labels and centered “THE CAMPUSCODE EXPERIENCE / BUILD TOGETHER.” heading. | Video control below it. | Centered and scaled down on small screens. |
-| Experience player | Large inset video frame within Experience section; about 22px corner radius desktop. | Fine dark border, pale grid/radial backdrop, 00:30 marker, “ONE ARENA” and “THE DIGITAL HOME FOR STUDENT INNOVATION.” video content, student information tile, central play control and TAP TO PLAY/PAUSE label. | Play button starts the supplied film; it changes to pause. The film is configured inline/muted and pauses when the user scrolls away. | Frame scales with the viewport; it is an actual video, not a static placeholder. |
-| How It Works heading | Section 03, 660px desktop / 1405px mobile. | “HOW IT WORKS” and “FROM IDEA TO IMPACT.” with small section number. | None. | Header aligns horizontally at desktop and reflows on mobile. |
-| How It Works cards | Four numbered cards: Discover, Team Up, Build, Ship. Two columns × two rows on desktop. | Fine 1px grid dividers; number and top rule, bold heading, muted description, small purple arrow at lower corner. | Cards are informational. No link/button or click destination observed. | Single-column vertical stack on mobile. |
-| Arena heading / View All | Section 04, top of 782px desktop / 686px mobile area. | “ENTER THE ARENA” and compact View All arrow action, separated from topic list by a horizontal rule. | View All scrolls to the list; it does not open a separate page. | Heading/action reflow at small width. |
-| Arena topic rows | Three 150px desktop rows, narrower/taller when stacked on mobile. | Sequence number; category label and bold title; short description; status and arrow; thin horizontal separators. Topics/statuses: Artificial Intelligence / AI Innovation / LIVE (lime dot); Web Development / Future Web / OPEN; Smart Technology / Campus Tech / UPCOMING. | Rows are not interactive despite the arrow decoration: no link/button, keyboard target or navigation on click. | Content columns wrap/stack while retaining row separators. |
-| Mission statement | Section 05, 890px desktop. | Mono eyebrow; huge three-line “GREAT IDEAS NEED BUILDERS.” with outlined final phrase; subdued oversized CAMPUSCODE background lettering; short gray paragraph. | Informational. | Large typography scales and wraps into fewer columns on mobile. |
-| Community/network | 707px desktop / 951px mobile. | “THE NETWORK” label; “FIND YOUR PEOPLE.” stacked solid/outlined; orbital CC graphic with dots; three lines about developers, designers and builders. | Informational; no visible action. | Heading, diagram and copy become a vertical composition. |
-| CTA | 700px desktop / 600px mobile. | Grid and faint purple circular outline, small READY? label, oversized “YOUR NEXT PROJECT STARTS HERE.”, black Join button with lime arrow. | Join CampusCode opens `/register`. | Headline scales/wraps; circle and CTA remain centered. |
-| Footer brand/copy | Footer begins at document y≈6544 desktop; total height 624px. | Logo and “The student hackathon arena. You build the idea, we run the competition.” | Brand mark is decorative in the observed footer. | Footer content stacks and is 869px tall at 390px. |
-| Footer link groups | Three columns labeled Product, Builders and Guides. | Product: About, Hackathons, How it works, Community. Builders: Students, Teams, Organizers, Developers. Guides: Hackathon Rules, FAQ, Support, Contact. | Anchors. Product links resolve to sections; most other target IDs are absent from this page (see interaction map). | Columns collapse into a vertical layout on mobile. |
-| Footer system/meta | Below link groups, then oversized low-contrast CampusCode wordmark and bottom metadata row. | Green-dot “ALL SYSTEMS OPERATIONAL”; TERMS, PRIVACY, CONTACT; © 2026 CAMPUSCODE; LEARN · BUILD · COMPETE · SHIP; CHENNAI · INDIA. | Terms/privacy/contact are anchors whose destination IDs are absent in the observed page. | Status/link row and metadata wrap/stack on mobile. |
+| Component | Purpose and likely inputs | State / events | Data flow |
+|---|---|---|---|
+| `App` | Application entry; mounts router and shared providers | Route transitions | Router connects the four required route families |
+| `SiteHeader` | Brand mark, public navigation, login/join actions | Menu open on compact screens; link clicks | Routes to landing, login, register |
+| `SiteFooter` | Product links, disclosure, attribution | None beyond navigation | Static copy |
+| `ThemeProvider`, `ThemeToggle` | Shared light/dark theme state and accessible control | User selection, cross-tab storage events, persistence failure announcement | Persists only the theme preference in `campuscode.theme`; initial theme is set before React renders |
+| `DashboardLayout` | Implemented dashboard header/navigation and nested page outlet | Current route, local state, toast and storage error/reset actions | Loads versioned local state, provides update/reset/notify functions through outlet context |
+| `Button` | Consistent action styles; `variant`, `size`, `disabled`, children | Click / keyboard activation | Calls parent callback or navigates |
+| `TextField` | Labeled text/password input; label, error, hint, type | Value, touched, visibility when applicable | Controlled by containing form |
+| `StatusBadge` | Textual state indicator; status and label | None | Receives explicit state, does not infer a real backend status |
+| `SectionHeading` | Heading, optional eyebrow and supporting copy | None | Presentational |
+| `EmptyState` | Explain an empty collection and offer a next action | Action click | Callback to parent |
+| `ToastRegion` / `Toast` | Announce local demo feedback | Queue and dismissal | UI feedback only; no server action implied |
+| `Modal` | Accessible dialog for confirmations/previews | Open, close, escape, backdrop policy | Parent owns dialog content/state |
 
-## Authentication routes
+## Public and account experiences
 
-| Component | Purpose, position and size | Visual/content details | Interaction | Responsive behavior |
-|---|---|---|---|---|
-| Auth header | Top of `/login` and `/register`. | Same logo mark; right-side “← BACK TO HOME”. | Brand and back button return to `/`. | At 390px it remains a compact single row. |
-| Auth introduction | Left/top panel on desktop, before the form on narrower screens. | Authentication/registration identifier; large “ENTER THE ARENA.” or “JOIN THE ARENA.” heading; explanatory copy; three numbered benefit/step items; status metadata. | Informational. | The measured mobile register intro is hidden (0px height); the form card becomes the primary screen. |
-| Auth form card | Beside the introduction on desktop; 1101px high on the 390px registration view. | White/light bordered card with CC/step marker, title and form fields. | Controls described in the interaction map. | Stacks below the intro on small screens; fields occupy the available width. |
-| Login form | `/login`; Existing Account/LOGIN. | Email, password, CAPTCHA, status/feedback, Login, Forgot Password, Create Account. | Validates missing credentials; toggles password visibility; refreshes CAPTCHA; reset switches to inline form; registration opens `/register`. | Long page layout remains readable on mobile; no separate login side navigation. |
-| Password reset state | Inline in the login card at `/login`. | “RESET YOUR PASSWORD”, email/CAPTCHA, Send Reset Code and Back to Login. | Back to Login restores the login form. Reset submission was not attempted. | Uses the same responsive form card. |
-| Registration form | `/register`; New Account/REGISTER. | Full name, email, disabled Student account type, organizer contact email, password and confirmation, CAPTCHA, age confirmation, Send Verification Code, Login. | Password visibility toggles; CAPTCHA refresh affordance; empty submission displays required-field feedback; Login opens `/login`. No actual verification submission was attempted. | Single-column fields at mobile width; the desktop introduction is not shown in the 390px capture. |
-| Auth footer | Bottom of both auth routes. | CampusCode © 2026, LEARN · BUILD · COMPETE · SHIP and ALL SYSTEMS OPERATIONAL. | No interactive control observed. | Compact, stacked footer. |
+| Component | Purpose and likely inputs | State / events | Data flow |
+|---|---|---|---|
+| `LandingHero` | Editorial value proposition and primary calls to action | Minimal reveal state; reduced-motion aware | Links to registration and event discovery |
+| `FeaturedEvents` | Curated sample opportunity previews | Optional carousel only if keyboard-accessible and justified | Reads clearly labeled mock event records |
+| `HowItWorks` | Explain discovery-to-participation journey | None | Static content |
+| `CommunityOpportunities` | Show types of opportunities without invented metrics | Link selection | Static, non-quantified claims |
+| `LoginForm` | Email, password, remember-me demo control | Field values, errors, password visibility | Validates locally; invokes demo session action; never authenticates remotely |
+| `RegisterForm` | Name, email, account type, password/confirmation, age confirmation | Values, validation, strength, visibility | Creates a local demo profile only; verification feedback explicitly mocked |
+| `PasswordStrength` | Explain password strength locally | Derived from current password | Pure derived presentation; no network calls |
+| `AuthLayout` | Share the distinctive two-column auth shell, logo/home route, cross-navigation, and local-demo disclosure | Page variant and content are props | Wraps Login/Register page-specific forms |
+| `AuthField` | Associate labels, inputs, hints, and validation feedback | Controlled by containing form; optional trailing control | Inputs and field error map belong to Login/Register |
+| `DemoHumanCheck` | Provide a frontend-only checkbox interaction | Checked state and error are props | A demo prerequisite only; not a CAPTCHA or security control |
+| `AuthToast` | Announce success, error, and informational feedback accessibly | Toast content/type and dismiss callback are props | Parent page owns toast lifecycle |
 
-## Not observed / inaccessible
+## Student workspace
 
-- No authenticated dashboard, user account, admin area, hackathon details, or backend behavior was reachable without credentials.
-- No conventional image gallery, testimonial section, sidebar or dropdown other than the responsive navigation was present on the inspected landing page.
-- The landing-page footer refers to destinations that are not rendered as sections or pages in the accessible public experience.
+| Component | Purpose and likely inputs | State / events | Data flow |
+|---|---|---|---|
+| `DashboardOverviewPage` | Implemented welcome, summary, momentum panels, deadlines, activity and quick actions | Local date; explicit learning-session action | Derives display from dashboard state and illustrative records |
+| `StatTile`, `StreakPanel`, `WeeklyActivityPanel`, `ActivityCalendarPanel`, `WeeklyGoalCard`, `QuickActions`, `DeadlinesPanel`, `RecentActivityPanel` | Overview sections implemented within `DashboardOverviewPage` | Check-in, weekly goal adjustment, and navigation links | Summary and activity derive from local state; deadlines and seed feed are labeled examples |
+| `StudentProfilePage` | Edit local identity/skills and preview selected visibility | Controlled fields, add/remove skills, visibility toggles, save | Persists non-sensitive choices; preview is not published or shared |
+| `ProjectsPage`, `ProjectDetailPage` | Create/edit/remove projects and inspect metadata, history, event link, and seven milestones | Validated form, confirmation on remove, status changes, milestone completion | Persists local projects; qualifying activity is capped at one streak record per device-local day; event submission requires a local registration |
+| `AchievementsPage`, `AchievementDetailDialog` | Filter eight criteria-driven badges and inspect progress/detail | Category filter and native dialog/Escape close | Progress derives from local/sample records; unlock IDs are deduplicated and are not official awards |
+| `CertificatesPage`, `CertificateDialog` | Browse a shared collection of sample completion previews | Preview selection, native dialog, Escape close | `getCertificateRecords` derives one preview per completed event registration; no credential is issued or verified |
+| `NotificationsPage` | Review local reminders, mark read, dismiss, or mark visible items read | Read/dismiss actions | Persists state; preferences filter examples only; no external delivery |
+| `SettingsPage` | Adjust weekly activity goal and local reminder preferences; reset demo state | Goal buttons, preference toggles, confirmed reset | Persists only in this browser; no email/push service |
+| `DailyStreak` | `StreakPanel` shows current/longest/total days and 3/7/14/30/60/100-day milestones | Explicit qualifying action and milestone feedback | Derived from one qualifying record per local date; opening the dashboard never counts |
+| `WeeklyGoal` | Implemented in `WeeklyGoalCard` and `SettingsPage` | Bounded 1–7 day goal adjustments | Derives progress from local entries; user may edit the goal |
+| `ActivityHeatmap` | Monthly `ActivityCalendarPanel` with month navigation and selected-day details | Previous/next month, day selection | Action counts derive from local/sample activity-log entries; weekly streak progress derives separately from qualifying records |
+| `DiscoverEventsPage`, `EventCard` | Search, filter, sort, display, and bookmark fictional opportunities | Query, filters, saved-only view, bookmark toggles | Derives cards from `eventCatalog`; bookmark IDs persist in shared local state |
+| `EventDetailsPage`, `RegistrationDialog` | Explain an event and collect a simulated local registration | Bookmark, eligibility acknowledgement, optional/required team name | Reads static catalog; stores a registration locally and opens its Event Hub |
+| `EventHubPage` | Overview, rounds, team, submissions, results, leaderboard, certificate, announcements | Tab selection, local team/submission edits, announcement read state | Joins catalog content with a registration by `eventId`; no organizer service is contacted |
+| `MyEventsPage`, `SavedOpportunityCard` | Filter local registrations and separately browse saved events | Status tab, remove bookmark | Reads shared registrations/bookmark IDs; registration is distinct from saved |
+| `RegistrationTracker` | Show local demo participation, team, progress, and next deadline | Selected event and local registration | Derived from registration and event catalog; no real registration claim |
+| `ProjectWorkspace` | Implemented by `ProjectsPage` and `ProjectDetailPage` | Metadata form, status, milestones, history, remove confirmation | Reads/writes local projects and logs linked event submission actions |
+| `StreaksAndAchievements` | Implemented as overview streak panel and `AchievementsPage` | Check-in, derived badge status | Criteria state derives from demo data, not official achievements |
+| `CertificatePreview` | Implemented as `CertificateDialog` | Open/close; Escape supported | Non-valid sample; never implies issuance or verification |
+| `NotificationCenter` | Implemented as `NotificationsPage` | Read/dismiss; mark visible items read | Local notification state; no push/email service |
+| `StudentProfile` | Implemented as `StudentProfilePage` with a public-style local preview | Edit profile, skills, visibility, and save | Persists only non-sensitive fields; visibility controls affect preview only |
+| `ActivityFeed` | Overview preview plus dedicated `ActivityPage` | Chronological display, type filter, load more, project/event links | Derives local/sample entries and completed event timeline entries; no community-wide activity is shown |
+
+## Cross-cutting behavior
+
+- Prefer controlled form inputs and explicit validation messages.
+- Persist only the local demo state needed for the experience; isolate it behind a small storage/state module.
+- Include a visible demo/reset affordance to restore seed state.
+- Shared state updates should drive dependent views (for example, bookmarking an event updates both discovery and My Events).
+- Use semantic buttons and links, dialog focus management, keyboard support, and accessible status announcements.
+- Keep presentation components mostly stateless; place business rules in feature-level helpers/hooks only when the logic is reused or non-trivial.
